@@ -4,15 +4,19 @@ using namespace std;
 
 class IFoodOrder;
 
-class FoodOrderState{
+class FoodOrderState 
+{
 public:
     virtual void getOrder() = 0;
     virtual void checkOrder() = 0;
     virtual void cancelOrder() = 0;
     virtual void showStatus() = 0;
+    virtual void markAsOutForDelivery() = 0;
+    virtual void markAsDelivered() = 0;
 };
 
-class WaitingOrderState : public FoodOrderState{
+class WaitingOrderState : public FoodOrderState 
+{
 private:
     IFoodOrder* order;
 public:
@@ -21,20 +25,26 @@ public:
     void checkOrder();
     void cancelOrder();
     void showStatus();
+    void markAsOutForDelivery();
+    void markAsDelivered();
 };
 
-class OrderPlacedStatus : public FoodOrderState{
+class OrderPlacedState : public FoodOrderState 
+{
 private:
     IFoodOrder* order;
 public:
-    OrderPlacedStatus(IFoodOrder* _order);
+    OrderPlacedState(IFoodOrder* _order);
     void getOrder();
     void checkOrder();
     void cancelOrder();
     void showStatus();
+    void markAsOutForDelivery();
+    void markAsDelivered();
 };
 
-class FoodPreparationState : public FoodOrderState{
+class FoodPreparationState : public FoodOrderState 
+{
 private:
     IFoodOrder* order;
 public:
@@ -43,9 +53,13 @@ public:
     void checkOrder();
     void cancelOrder();
     void showStatus();
+    void markAsOutForDelivery();
+    void markAsDelivered();
 };
 
-class OutForDeliveryState : public FoodOrderState{
+
+class OutForDeliveryState : public FoodOrderState 
+{
 private:
     IFoodOrder* order;
 public:
@@ -54,9 +68,12 @@ public:
     void checkOrder();
     void cancelOrder();
     void showStatus();
+    void markAsOutForDelivery();
+    void markAsDelivered();
 };
 
-class DeliveredState : public FoodOrderState{
+class DeliveredState : public FoodOrderState 
+{
 private:
     IFoodOrder* order;
 public:
@@ -65,4 +82,6 @@ public:
     void checkOrder();
     void cancelOrder();
     void showStatus();
+    void markAsOutForDelivery();
+    void markAsDelivered();
 };
